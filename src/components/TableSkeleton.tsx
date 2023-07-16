@@ -3,7 +3,7 @@ import { Box, Skeleton, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react
 
 const TableSkeleton = () => {
   return (
-    <Box className="predictions-container" mt="20px" border="1px solid #e2e8f0" borderRadius="10px" maxW="500px">
+    <Box className="predictions-container" border="1px solid #e2e8f0" borderRadius="10px" w="100%">
     <Table variant="striped" colorScheme="gray">
       <Thead>
         <Tr>

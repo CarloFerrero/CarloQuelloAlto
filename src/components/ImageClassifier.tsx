@@ -7,6 +7,7 @@ import {
   Button,
   Image as ChakraImage,
   Select,
+  Flex
 } from '@chakra-ui/react';
 import { AiOutlinePicture } from 'react-icons/ai';
 
@@ -60,7 +61,8 @@ const ImageClassifier: React.FC = () => {
   }, [selectedModel]);
 
   return (
-    <Box p={4} maxWidth="500px" mx="auto" >
+    <Flex p={4} gap={4} flexDirection={{sm:"column", md:"column", lg:"row"}} alignItems="flex-start" w="100%">
+      <Box w="100%" minW="400px">
       <Select
         placeholder="Select model"
         mb={6}
@@ -74,16 +76,16 @@ const ImageClassifier: React.FC = () => {
 
       <Box className="dog-image" display="flex" justifyContent="center" mb={6}>
         <ChakraImage
-          src={file ? URL.createObjectURL(file) : 'https://via.placeholder.com/500'}
+          src={file ? URL.createObjectURL(file) : 'https://via.placeholder.com/400'}
           alt="dog"
-          width="500px"
-          height="500px"
+          width="100%"
+          height="400px"
           objectFit="cover"
           borderRadius="md"
         />
       </Box>
 
-      <Box className="upload-container" display="flex" gap={6} flexDirection="column" maxW="500px">
+      <Box className="upload-container" display="flex" gap={6} flexDirection="column" w="100%">
         <UploadImage onFileChange={(files) => setFile(files[0])} />
         <Button
           onClick={handlePredict}
@@ -103,6 +105,8 @@ const ImageClassifier: React.FC = () => {
           {isLoading ? 'Predicting...' : 'Predict'}
         </Button>
       </Box>
+      </Box>
+      <Box w="100%">
       {predictions.length > 0 ? (
       <PredictionsTable 
         predictions={predictions}
@@ -111,7 +115,8 @@ const ImageClassifier: React.FC = () => {
       ) : isLoading ? (
        <TableSkeleton />
       ) : null}
-    </Box>
+      </Box>
+    </Flex>
   );
 };
 

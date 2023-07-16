@@ -11,7 +11,7 @@ const PredictionsTable: React.FC<PredictionsTableProps> = ({
     selectedModel
 }) => {
   return (
-    <Box className="predictions-container" mt="20px" border="1px solid #e2e8f0" borderRadius={6} maxW="500px">
+    <Box className="predictions-container" border="1px solid #e2e8f0" borderRadius={6} w="100%">
     <Table variant="striped" colorScheme="gray">
       <Thead>
         <Tr>
