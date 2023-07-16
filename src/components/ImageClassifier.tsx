@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
+import * as cocoSsd from '@tensorflow-models/coco-ssd';
 import {
   Box,
   Button,
   Image as ChakraImage,
-  Text,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Skeleton,
+  Select,
 } from '@chakra-ui/react';
 import { AiOutlinePicture } from 'react-icons/ai';
 
 import UploadImage from './UploadImage';
+import TableSkeleton from './TableSkeleton';
+import PredictionsTable from './PredictionsTable';
 
 const ImageClassifier: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [predictions, setPredictions] = useState<{ className: string; probability: number }[]>([]);
+  const [predictions, setPredictions] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedModel, setSelectedModel] = useState<'mobilenet' | 'coco-ssd'>('mobilenet'); // New state for selected model
 
   const handlePredict = async () => {
     if (!file) return;
@@ -32,9 +29,18 @@ const ImageClassifier: React.FC = () => {
     img.src = URL.createObjectURL(file);
 
     try {
-      // @ts-ignore
-      const model = await mobilenet.load();
-      const predictions = await model.classify(img);
+      let model;
+      let predictions
+      if (selectedModel === 'mobilenet') {
+        // @ts-ignore
+        model = await mobilenet.load();
+        predictions = await model.classify(img);
+      } else {
+        // @ts-ignore
+        model = await cocoSsd.load();
+        predictions = await model.detect(img);
+        console.log(predictions)
+      }
       setPredictions(predictions);
     } catch (error) {
       console.error('Error classifying image:', error);
@@ -49,8 +55,23 @@ const ImageClassifier: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => {
+    setPredictions([]);
+  }, [selectedModel]);
+
   return (
-    <Box p={4} maxWidth="500px" mx="auto">
+    <Box p={4} maxWidth="500px" mx="auto" >
+      <Select
+        placeholder="Select model"
+        mb={6}
+        onChange={(e) => {
+          setSelectedModel(e.target.value as 'mobilenet' | 'coco-ssd');
+        }}
+      >
+        <option value="mobilenet">MobileNet</option>
+        <option value="coco-ssd">CocoSsd</option>
+      </Select>
+
       <Box className="dog-image" display="flex" justifyContent="center" mb={6}>
         <ChakraImage
           src={file ? URL.createObjectURL(file) : 'https://via.placeholder.com/500'}
@@ -83,55 +104,12 @@ const ImageClassifier: React.FC = () => {
         </Button>
       </Box>
       {predictions.length > 0 ? (
-        <Box className="predictions-container" mt="20px" border="1px solid #e2e8f0" borderRadius={6} maxW="500px">
-          <Table variant="striped" colorScheme="gray">
-            <Thead>
-              <Tr>
-                <Th>Class Name</Th>
-                <Th>Probability</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {predictions.map((prediction, index) => (
-                <Tr key={index}>
-                  <Td>
-                    <Text fontSize="md">{prediction.className}</Text>
-                  </Td>
-                  <Td>
-                    <Text fontSize="md">{Math.round(prediction.probability * 100)}%</Text>
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </Box>
+      <PredictionsTable 
+        predictions={predictions}
+        selectedModel={selectedModel}
+      />
       ) : isLoading ? (
-        <Box className="predictions-container" mt="20px" border="1px solid #e2e8f0" borderRadius="10px" maxW="500px">
-          <Table variant="striped" colorScheme="gray">
-            <Thead>
-              <Tr>
-                <Th>
-                  <Skeleton height="20px" width="100px" />
-                </Th>
-                <Th>
-                  <Skeleton height="20px" width="100px" />
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {[1, 2, 3].map((index) => (
-                <Tr key={index}>
-                  <Td>
-                    <Skeleton height="20px" width="100px" />
-                  </Td>
-                  <Td>
-                    <Skeleton height="20px" width="100px" />
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </Box>
+       <TableSkeleton />
       ) : null}
     </Box>
   );

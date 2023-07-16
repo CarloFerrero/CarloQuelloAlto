@@ -11,7 +11,7 @@ import ImageClassifier from "./components/ImageClassifier"
 export const App = () => (
   <ChakraProvider theme={theme}>
     <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
+      <Grid minH="100vh" >
         <VStack spacing={8}>
           <ImageClassifier />
         </VStack>

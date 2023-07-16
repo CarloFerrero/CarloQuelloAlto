@@ -5,3 +5,10 @@ declare module '@tensorflow-models/mobilenet' {
     }
   }
   
+declare module '@tensorflow-models/coco-ssd' {
+    interface ClassificationResult {
+      className: string;
+      probability: number;
+    }
+  }
+  
