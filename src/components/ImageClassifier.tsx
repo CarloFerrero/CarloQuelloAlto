@@ -7,19 +7,20 @@ import {
   Button,
   Image as ChakraImage,
   Select,
-  Flex
+  Flex,
 } from '@chakra-ui/react';
 import { AiOutlinePicture } from 'react-icons/ai';
 
 import UploadImage from './UploadImage';
 import TableSkeleton from './TableSkeleton';
 import PredictionsTable from './PredictionsTable';
+import ImageWithBoundingBoxes from './ImageBoundingBox';
 
 const ImageClassifier: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [predictions, setPredictions] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedModel, setSelectedModel] = useState<'mobilenet' | 'coco-ssd'>('mobilenet'); // New state for selected model
+  const [selectedModel, setSelectedModel] = useState<'mobilenet' | 'coco-ssd'>('coco-ssd'); // New state for selected model
 
   const handlePredict = async () => {
     if (!file) return;
@@ -61,8 +62,8 @@ const ImageClassifier: React.FC = () => {
   }, [selectedModel]);
 
   return (
-    <Flex p={4} gap={4} flexDirection={{sm:"column", md:"column", lg:"row"}} alignItems="flex-start" w="100%">
-      <Box w="100%" minW="400px">
+    <Flex p={4} gap={4} flexDirection={{base: "column", sm:"column", md:"column", lg:"row" }} alignItems="flex-start" w="100%">
+      <Box w="100%" minW="300px">
       <Select
         placeholder="Select model"
         mb={6}
@@ -74,19 +75,27 @@ const ImageClassifier: React.FC = () => {
         <option value="coco-ssd">CocoSsd</option>
       </Select>
 
-      <Box className="dog-image" display="flex" justifyContent="center" mb={6}>
-        <ChakraImage
-          src={file ? URL.createObjectURL(file) : 'https://via.placeholder.com/400'}
-          alt="dog"
-          width="100%"
-          height="400px"
-          objectFit="cover"
-          borderRadius="md"
-        />
+      <Box className="upload-container" display="flex" gap={6} mb={6} flexDirection="column" w="100%">
+        <UploadImage onFileChange={(files) => setFile(files[0])} />
       </Box>
 
+      <Box className="dog-image" display="flex" justifyContent="center" mb={6}>
+          {file ? (
+            <ImageWithBoundingBoxes imageSrc={URL.createObjectURL(file)} predictions={predictions} />
+          ) : (
+            <ChakraImage
+              src="https://via.placeholder.com/400"
+              alt="dog"
+              width="100%"
+              height="400px"
+              objectFit="cover"
+              borderRadius="md"
+            />
+          )}
+      </Box>
+
+
       <Box className="upload-container" display="flex" gap={6} flexDirection="column" w="100%">
-        <UploadImage onFileChange={(files) => setFile(files[0])} />
         <Button
           onClick={handlePredict}
           isLoading={isLoading}
@@ -105,6 +114,7 @@ const ImageClassifier: React.FC = () => {
           {isLoading ? 'Predicting...' : 'Predict'}
         </Button>
       </Box>
+
       </Box>
       <Box w="100%">
       {predictions.length > 0 ? (

@@ -10,7 +10,7 @@ const LeftSidebar: React.FC = () => {
         "The coco-ssd model is trained to detect common objects in images, such as people, cars, animals, etc.",
     },
     "mobileNet": {
-      name: "MobileNet",
+      name: "mobileNet",
       description:
         "MobileNet is a lightweight neural network architecture designed for efficient on-device vision applications.",
     },
@@ -19,7 +19,7 @@ const LeftSidebar: React.FC = () => {
   return (
     <Box p={4} borderRight={{sm: "none", md: "1px solid #ccc"}} textAlign="left">
       <Text fontWeight="bold" fontSize="xl" mb={2}>
-        Model Information
+        Image Classifier
       </Text>
       <Text fontWeight={"normal"}>
         {modelInfo["coco-ssd"].name}
