@@ -52,6 +52,6 @@ I welcome contributions to this repository! If you find any bugs, want to add ne
 
 ## Contact
 
-If you have any questions or want to get in touch, you can reach me at [your@email.com](mailto:your@email.com).
+If you have any questions or want to get in touch, you can reach me at [ferrerocarlo96@gmail.com](mailto:ferrerocarlo96@gmail.com).
 
 Thank you for visiting CarloQuelloAlto_!
