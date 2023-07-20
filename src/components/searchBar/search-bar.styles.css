@@ -1,0 +1,16 @@
+.search-box-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-top: 0px;
+  flex-direction: column;
+}
+.search-box-input {
+  margin: 0px;
+  padding: 0px;
+  border-radius: 10px;
+  height: 30px;
+  border: 1px solid;
+  border-color: #0d0d0d;
+  padding: 0px 0px;
+}

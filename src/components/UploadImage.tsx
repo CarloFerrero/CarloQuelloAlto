@@ -1,6 +1,7 @@
-import React, { useCallback, FC } from 'react';
-import { useDropzone, FileWithPath } from 'react-dropzone';
 import { Box, Text } from '@chakra-ui/react';
+import { FileWithPath, useDropzone } from 'react-dropzone';
+import React, { FC, useCallback } from 'react';
+
 import { FiCamera } from "react-icons/fi"
 
 interface UploadImageProps {
@@ -44,7 +45,7 @@ const UploadImage: FC<UploadImageProps> = ({ onFileChange }) => {
       ) : (
         <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" gap="3px">
           <FiCamera color="black" />
-          <Text fontSize="md">Take a photo</Text>
+          <Text fontSize="md">Upload or take a photo</Text>
         </Box>
       )}
     </Box>

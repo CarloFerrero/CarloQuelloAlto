@@ -1,5 +1,6 @@
-import React from 'react';
 import { Box, Image as ChakraImage } from '@chakra-ui/react';
+
+import React from 'react';
 
 interface ImageWithBoundingBoxesProps {
   imageSrc: string;
@@ -18,7 +19,7 @@ const ImageWithBoundingBoxes : React.FC<ImageWithBoundingBoxesProps> = ({ imageS
 
   console.log(scaleX, scaleY)
   return (
-    <Box position="relative" width="100%">
+    <Box position="relative" width="100%" mb={4}>
       <ChakraImage src={imageSrc} alt="Image" width="100%" height="auto" />
       {/* {predictions.map((prediction : any, index: any) => (
         <Box
