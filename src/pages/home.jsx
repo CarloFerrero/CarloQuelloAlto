@@ -37,7 +37,7 @@ const Homepage = () => {
         >
           {filterProjects.map((item) => {
             return (
-              <GridItem colSpan={item.colspan} key={item.id}>
+              <GridItem colSpan={{ sm: 1, md: item.colspan }} key={item.id}>
                 <Link to={item.path}>
                   <Card
                     title={item.title}

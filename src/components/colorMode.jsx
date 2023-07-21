@@ -1,12 +1,13 @@
-import React from "react";
-import { useColorMode, IconButton } from "@chakra-ui/react";
+import { IconButton, useColorMode } from "@chakra-ui/react";
+
 import { FiMoon } from "react-icons/fi";
+import React from "react";
 
 const ColorMode = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <IconButton
-      variant="ghost"
+      variant="outline"
       icon={<FiMoon fontSize="1.25rem" />}
       aria-label="Open Menu"
       onClick={toggleColorMode}

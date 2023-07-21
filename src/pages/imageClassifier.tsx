@@ -16,7 +16,6 @@ import React, { useEffect, useState } from 'react';
 
 import { AiOutlinePicture } from 'react-icons/ai';
 import ImageWithBoundingBoxes from '../components/imageBoundingBox';
-import LeftSidebar from '../components/leftSidebar';
 import PredictionsTable from '../components/predictionsTable';
 import TableSkeleton from '../components/tableSkeleton';
 import UploadImage from '../components/uploadImage';

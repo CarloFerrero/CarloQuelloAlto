@@ -1,37 +1,32 @@
-import { Box, Button } from "@chakra-ui/react";
-import React, { useRef, useCallback } from "react";
-import Webcam, { WebcamProps } from "react-webcam";
+import React, { useEffect, useRef } from 'react';
 
-interface WebcamComponentProps extends WebcamProps {
-  onCapture: (imageSrc: string) => void;
-}
+const WebcamComponent = React.forwardRef<HTMLVideoElement | null>((props, ref) => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-const WebcamComponent: React.FC<WebcamComponentProps> = ({ onCapture, ...webcamProps }) => {
-  const webcamRef = useRef<Webcam>(null);
+  useEffect(() => {
+    const startWebcam = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        console.log("stream: ", stream);
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          console.log("videoRef.current: ", videoRef.current);
+        }
+      } catch (error) {
+        console.error('Error accessing webcam:', error);
+      }
+    };
 
-  const capture = useCallback(() => {
-    if (webcamRef.current) {
-      const imageSrc = webcamRef.current.getScreenshot();
-      if(imageSrc)
-      onCapture(imageSrc);
-    }
-  }, [onCapture]);
+    startWebcam();
+  }, []);
 
   return (
-    <Box>
-      <Webcam
-        height={webcamProps.height || 720}
-        // @ts-ignore
-        screenshotFormat="image/jpeg"
-        width={webcamProps.width || 1280}
-        ref={webcamRef}
-        {...webcamProps}
-      />
-      <Box display="flex" mt="20px">
-      <Button onClick={capture}>Capture photo</Button>
-      </Box>
-    </Box>
-  );
-};
+    <video 
+      style={{ width: '50%' }}
+      // @ts-ignore
+      ref={(el) => { videoRef.current = el; if (ref) ref.current = el; }} autoPlay playsInline muted 
+    />
+  )
+});
 
 export default WebcamComponent;

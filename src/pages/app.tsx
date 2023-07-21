@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/redirect-banner" element={<RedirectBanner />} />
           <Route path="/flea" element={<Flea />} />
           <Route path="/image-classifier" element={<ImageClassifier />} />
-          <Route path="/pose-detection" element={<PoseDetection />} />
+          <Route path="/pose-detection" element={<PoseDetection width={640} height={480} />} />
         </Routes>
       </ScrollToTop>
       <Footer />

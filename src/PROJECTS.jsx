@@ -1,6 +1,6 @@
 export const PROJECTS = [
   {
-    id: 4,
+    id: 0,
     colspan: 4,
     theme: "base",
     tags: ["react", "ts"],
@@ -10,7 +10,7 @@ export const PROJECTS = [
       "Image Classifier is a web app that allows you to upload an image and get the prediction of the object in the image. The app is built with React and uses the MobileNet model to classify the images.",
   },
   {
-    id: 5,
+    id: 1,
     colspan: 2,
     theme: "base",
     tags: ["react", "ts"],
@@ -20,7 +20,7 @@ export const PROJECTS = [
       "The Pose Detection app is a web app that allows you to use your webcam to detect your body pose. The app is built with React and uses the PoseNet model to detect the pose.",
   },
   {
-    id: 0,
+    id: 3,
     colspan: 2,
     path: "/roman-numerals-decoder",
     theme: "base",
@@ -30,7 +30,7 @@ export const PROJECTS = [
       "Create a function that takes a Roman numeral as its argument and returns its value as a numeric decimal integer. You don't need tovalidate the form of the Roman numeral.",
   },
   {
-    id: 1,
+    id: 4,
     colspan: 2,
     path: "/decode-morse",
     title: "👨🏻‍💻 Decode morse",
@@ -40,8 +40,8 @@ export const PROJECTS = [
       "write a simple Morse code decoder. While the Morse code is now mostly superseded by voice and digital data communication channels, it still has its use in some applications around the world.",
   },
   {
-    id: 2,
-    colspan: 1,
+    id: 5,
+    colspan: 2,
     theme: "base",
     tags: ["js", "alg"],
     path: "/redirect-banner",
@@ -50,8 +50,8 @@ export const PROJECTS = [
       "Create a script that takes the timezone of the browser and redirects you to the version of the website that you ask for",
   },
   {
-    id: 3,
-    colspan: 1,
+    id: 6,
+    colspan: 2,
     theme: "base",
     tags: ["react", "fb"],
     path: "/flea",

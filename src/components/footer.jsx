@@ -1,5 +1,6 @@
-import { ButtonGroup, Box, IconButton, Stack, Text } from "@chakra-ui/react";
+import { Box, ButtonGroup, IconButton, Stack, Text } from "@chakra-ui/react";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 
 const Footer = () => (
@@ -24,21 +25,15 @@ const Footer = () => (
         <ButtonGroup variant="ghost">
           <IconButton
             as="a"
-            href="#"
+            href="https://www.linkedin.com/in/carlo-ferrero-53439122a/"
             aria-label="LinkedIn"
             icon={<FaLinkedin fontSize="1.25rem" />}
           />
           <IconButton
             as="a"
-            href="#"
+            href="https://github.com/CarloFerrero"
             aria-label="GitHub"
             icon={<FaGithub fontSize="1.25rem" />}
-          />
-          <IconButton
-            as="a"
-            href="#"
-            aria-label="Twitter"
-            icon={<FaTwitter fontSize="1.25rem" />}
           />
         </ButtonGroup>
       </Stack>

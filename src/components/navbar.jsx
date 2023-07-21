@@ -1,6 +1,7 @@
-import { Box, HStack, Text, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Flex, HStack, Image, Text, useBreakpointValue } from "@chakra-ui/react";
 
 import ColorMode from "./colorMode";
+import DownloadResume from "./DownloadResume";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -9,7 +10,7 @@ const Navbar = () => {
     lg: true,
   });
   return (
-    <Box as="section">
+    <Box as="section" position="sticky" top="0" zIndex="sticky" backdropFilter="blur(10px)">
       <Box
         as="nav"
         bg="bg-surface"
@@ -27,17 +28,27 @@ const Navbar = () => {
           }}
         >
           <HStack spacing="10" justify="space-between">
-            <Box>
+            <Flex gap="10px" alignItems='center'>
+              {/* <Image 
+                src="/logo.jpg"
+                alt="Carlo Quell'Alto"
+                boxSize="40px"
+                borderRadius="full"
+              /> */}
               <Text fontWeight="bold" fontSize="26px">
                 <Link to="/">CarloQuelloAlto_</Link>
               </Text>
-            </Box>
+            </Flex>
             {isDesktop ? (
               <HStack spacing="3">
                 <ColorMode />
+                <DownloadResume />
               </HStack>
             ) : (
+              <HStack spacing="3">
               <ColorMode />
+              <DownloadResume />
+              </HStack>
             )}
           </HStack>
         </Box>
